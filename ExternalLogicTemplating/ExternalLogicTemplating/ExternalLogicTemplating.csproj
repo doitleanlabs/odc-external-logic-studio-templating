@@ -1,0 +1,73 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="resources\icons\icon_extension.png" />
+    <None Remove="resources\icons\icon_magnifier.png" />
+    <None Remove="resources\icons\icon_merge.png" />
+    <None Remove="resources\icon_gear.png" />
+    <None Remove="resources\icon_generate.png" />
+    <None Remove="resources\templates\Template_Action.txt" />
+    <None Remove="resources\templates\Template_Interface.txt" />
+    <None Remove="resources\templates\Template_Project.csproj.txt" />
+    <None Remove="resources\templates\Template_Solution.sln.txt" />
+    <None Remove="resources\templates\Template_Structure.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="resources\icons\icon_extension.png" />
+    <EmbeddedResource Include="resources\icons\icon_gear.png" />
+    <EmbeddedResource Include="resources\icons\icon_generate.png" />
+    <EmbeddedResource Include="resources\icons\icon_magnifier.png" />
+    <EmbeddedResource Include="resources\icons\icon_merge.png" />
+    <EmbeddedResource Include="resources\templates\Template_Structure.txt" />
+    <EmbeddedResource Include="resources\templates\Template_Action.txt" />
+    <EmbeddedResource Include="resources\templates\Template_Interface.txt" />
+    <EmbeddedResource Include="resources\templates\Template_Project.csproj.txt" />
+    <EmbeddedResource Include="resources\templates\Template_Solution.sln.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Handlebars.Net" Version="2.1.6" />
+    <PackageReference Include="Handlebars.Net.Helpers" Version="2.4.3" />
+    <PackageReference Include="Handlebars.Net.Helpers.Core" Version="2.4.3" />
+    <PackageReference Include="Handlebars.Net.Helpers.DynamicLinq" Version="2.4.3" />
+    <PackageReference Include="Handlebars.Net.Helpers.Humanizer" Version="2.4.3" />
+    <PackageReference Include="Handlebars.Net.Helpers.Json" Version="2.4.3" />
+    <PackageReference Include="Handlebars.Net.Helpers.Random" Version="2.4.3" />
+    <PackageReference Include="Handlebars.Net.Helpers.Xeger" Version="2.4.3" />
+    <PackageReference Include="Handlebars.Net.Helpers.XPath" Version="2.4.3" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.9.2" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.9.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="OutSystems.ExternalLibraries.SDK" Version="1.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="OutSystems.FrameworkExtensions">
+      <HintPath>..\..\OutSystems.FrameworkExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="OutSystems.MetaModel">
+      <HintPath>..\..\OutSystems.MetaModel.dll</HintPath>
+    </Reference>
+    <Reference Include="OutSystems.Model.Implementation.Extensions">
+      <HintPath>..\..\OutSystems.Model.Implementation.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="OutSystems.Zip">
+      <HintPath>..\..\OutSystems.Zip.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="dependencies\" />
+  </ItemGroup>
+
+</Project>

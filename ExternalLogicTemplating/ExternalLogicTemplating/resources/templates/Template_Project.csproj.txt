@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+    {{#each Icons}}
+        <None Remove="resources\\{{FileName}}" />
+    {{/each}}
+    </ItemGroup>
+
+    <ItemGroup>
+    {{#each Icons}}
+        <EmbeddedResource Include="resources\\{{FileName}}" />
+    {{/each}}
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="OutSystems.ExternalLibraries.SDK" Version="1.4.0" />
+    </ItemGroup>
+</Project>

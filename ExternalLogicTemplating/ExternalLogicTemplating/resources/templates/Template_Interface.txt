@@ -1,0 +1,20 @@
+﻿using OutSystems.ExternalLibraries.SDK;
+using {{ProjectName}}.structure;
+
+namespace {{ProjectName}}.interfaces
+{
+    [OSInterface(
+       {{#annotationsData ProjectAnnotationData 2}}
+       {{/annotationsData}}
+    )]
+    public interface Interface{{ProjectName}}
+    {   
+        {{#each Actions}}
+        [OSAction(
+            {{#annotationsData ActionAnnotationData 3}}
+            {{/annotationsData}}
+        )]
+        {{Output}} {{Name}}({{{ActionDefinition}}});
+        {{/each}}
+    }
+}

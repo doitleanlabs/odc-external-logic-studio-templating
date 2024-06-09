@@ -1,0 +1,20 @@
+﻿using OutSystems.ExternalLibraries.SDK;
+
+namespace {{ProjectName}}.structure
+{
+    {{#each Structures}}
+    [OSStructure(
+        Description = {{{Description}}}
+    )]
+    public struct {{Name}} {
+        {{#each Attributes}}
+        [OSStructureField(
+        {{#annotationsData AttributeAnnotationData 3}}
+        {{/annotationsData}}
+        )]
+        public {{{DataType}}} {{Name}};
+        {{/each}}
+    }
+
+    {{/each}}
+}
