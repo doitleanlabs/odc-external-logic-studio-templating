@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExternalLogicTemplating", "ExternalLogicTemplating\ExternalLogicTemplating.csproj", "{170E93A1-7C10-447B-8F8F-4C5FC47DBEE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalLogicTemplatingTest", "ExternalLogicTemplatingTest\ExternalLogicTemplatingTest.csproj", "{99379ABF-5F6C-49A3-AADF-62DF835DE480}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{170E93A1-7C10-447B-8F8F-4C5FC47DBEE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{170E93A1-7C10-447B-8F8F-4C5FC47DBEE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{170E93A1-7C10-447B-8F8F-4C5FC47DBEE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99379ABF-5F6C-49A3-AADF-62DF835DE480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99379ABF-5F6C-49A3-AADF-62DF835DE480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99379ABF-5F6C-49A3-AADF-62DF835DE480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99379ABF-5F6C-49A3-AADF-62DF835DE480}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

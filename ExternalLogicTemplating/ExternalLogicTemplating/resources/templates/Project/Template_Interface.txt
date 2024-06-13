@@ -1,5 +1,5 @@
 ﻿using OutSystems.ExternalLibraries.SDK;
-using {{ProjectName}}.structure;
+using {{ProjectName}}.structures;
 
 namespace {{ProjectName}}.interfaces
 {

@@ -13,22 +13,9 @@ namespace ExternalLogicTemplating.templating {
         public byte[] GenerateZipFiles(ST_Project Project, List<ST_ActionDefinition> Actions, List<ST_StructureDefinition> Structures) {
             byte[] zipFile;
 
-            // Solution File
-            string projectGuid = Guid.NewGuid().ToString().ToUpper();
-            string solutionGuid = Guid.NewGuid().ToString().ToUpper();
-            string projectTypeGuid = "{9A19103F-16F7-4668-BE54-9A1E7A4F7556}";
-            ZipManagement zipManagement = new ZipManagement();
-
-            var solutionContext = new {
-                ProjectName = Project.ProjectName,
-                ProjectGuid = "{" + projectGuid + "}",
-                SolutionGuid = "{" + solutionGuid + "}",
-                ProjectTypeGuid = projectTypeGuid
-            };
-
-            string solutionFile = TemplatingUtil.generateFile(FileToBeProcessed.Solution, solutionContext);
-
-
+            /*
+             * BEGIN Main Project
+             */
             // Project File
             dynamic projectContext = new ExpandoObject();
 
@@ -52,7 +39,43 @@ namespace ExternalLogicTemplating.templating {
             //Structures File
             string structureFile = GenerateStructureFile(Project, Structures);
 
-            zipFile = zipManagement.generateZipFiles(Project.ProjectName, solutionFile, actionFile, interfaceFile, structureFile, projectFile, Project.Icons);
+            /*
+             * BEGIN Test Project
+             */
+            var testProjectContext = new {
+                ProjectName = $"..\\{Project.ProjectName}\\{Project.ProjectName}.csproj"
+            };
+            string testProjectFile = TemplatingUtil.generateFile(FileToBeProcessed.TestProject, testProjectContext);
+
+            string testClassFile = GenerateTestClassFile(Project, Actions);
+
+            /*
+             * BEGIN Solution
+             */
+            string projectGuid = Guid.NewGuid().ToString().ToUpper();
+            string testProjectGuid = Guid.NewGuid().ToString().ToUpper();
+            string solutionGuid = Guid.NewGuid().ToString().ToUpper();
+            string projectTypeGuid = "{9A19103F-16F7-4668-BE54-9A1E7A4F7556}";
+            string testProjectTypeGuid = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}";
+            
+            ZipManagement zipManagement = new ZipManagement();
+
+            var solutionContext = new {
+                SolutionGuid = "{" + solutionGuid + "}",
+                // Project
+                ProjectName = Project.ProjectName,
+                ProjectGuid = "{" + projectGuid + "}",
+                ProjectTypeGuid = projectTypeGuid,
+
+                // Test Project
+                TestProjectGuid = testProjectGuid,
+                TestProjectName = Project.ProjectName + "Test",
+                TestProjectTypeGuid = testProjectTypeGuid
+            };
+
+            string solutionFile = TemplatingUtil.generateFile(FileToBeProcessed.Solution, solutionContext);
+
+            zipFile = zipManagement.generateZipFiles(Project.ProjectName, solutionFile, actionFile, interfaceFile, structureFile, projectFile, testProjectFile, testClassFile, Project.Icons);
 
             return zipFile;
         }
@@ -201,6 +224,33 @@ namespace ExternalLogicTemplating.templating {
 
             string structureFile = TemplatingUtil.generateFile(FileToBeProcessed.Structure, structureContext);
             return structureFile;
+        }
+
+        /// <summary>
+        /// Generates the Test class file
+        /// </summary>
+        /// <param name="project">Project data</param>
+        /// <param name="Actions">Project actions</param>
+        /// <returns>Tes Class file</returns>
+        private string GenerateTestClassFile(ST_Project project, List<ST_ActionDefinition> Actions) {
+            dynamic testClassContext = new ExpandoObject();
+
+            // Project data
+            testClassContext.ProjectName = project.ProjectName;
+            testClassContext.TestProjectName = project.ProjectName + "Test";
+
+            // Actions
+            testClassContext.Actions = new List<ExpandoObject>();
+            foreach (ST_ActionDefinition action in Actions) {
+
+                dynamic actionData = new ExpandoObject();
+                actionData.Name = action.Name;
+
+                testClassContext.Actions.Add(actionData);
+            }
+
+            string interfaceFile = TemplatingUtil.generateFile(FileToBeProcessed.TestClass, testClassContext);
+            return interfaceFile;
         }
     }
 }

@@ -5,8 +5,8 @@ using Microsoft.CodeAnalysis;
 namespace ExternalLogicTemplating.Merge {
     internal class MergeLogic {
         public string Merge(string NewFile, string ExistingFile) {
-            SyntaxTree treeOldFile = CSharpSyntaxTree.ParseText(ExistingFile);
-            CompilationUnitSyntax existingRoot = treeOldFile.GetCompilationUnitRoot();
+            SyntaxTree treeExistingFile = CSharpSyntaxTree.ParseText(ExistingFile);
+            CompilationUnitSyntax existingRoot = treeExistingFile.GetCompilationUnitRoot();
             Dictionary<string, ClassDeclarationSyntax> existingClasses = existingRoot.DescendantNodes().OfType<ClassDeclarationSyntax>().ToDictionary(c => c.Identifier.Text);
 
             SyntaxTree treeNewFile = CSharpSyntaxTree.ParseText(NewFile);
