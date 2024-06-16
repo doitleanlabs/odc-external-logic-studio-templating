@@ -3,10 +3,10 @@ using ExternalLogicTemplating.action;
 
 namespace ExternalLogicTemplatingTest {
     public class UnitTestExternalLogicTemplating {
-        ExternalLogicTemplatingLogic logic;
+        ActionsExternalLogicTemplating logic;
 
         public UnitTestExternalLogicTemplating() {
-            logic = new ExternalLogicTemplatingLogic();
+            logic = new ActionsExternalLogicTemplating();
         }
         [Fact]
         public void TestFileGeneration() {
@@ -155,13 +155,31 @@ namespace ExternalLogicTemplatingTest {
         }
 
         [Fact]
-        public void TestFileGenerations() {
-            string newFile = File.ReadAllText(@"C:\Users\victo\Documents\Drive DiL\ONE 2024\temp zip files\MyFirstProject_v21\MyFirstProjectTest\UnitTestMyFirstProject.cs", System.Text.Encoding.UTF8);
-            string existingFile = File.ReadAllText(@"C:\Users\victo\Documents\Drive DiL\ONE 2024\temp zip files\UnitTestMyFirstProject.cs", System.Text.Encoding.UTF8);
+        public void MergeActionsFileForGitHub() {
+            string existingFile = File.ReadAllText(@"C:\Users\victo\Documents\Drive DiL\ONE 2024\temp zip files\MyFirstProject_v29\MyFirstProject\actions\ActionsMyFirstProject.cs", System.Text.Encoding.UTF8);
+            string newFile = File.ReadAllText(@"C:\Users\victo\Documents\Drive DiL\ONE 2024\Test Data\New Class with AI.cs", System.Text.Encoding.UTF8);
 
-            string mergedFile = logic.MergeActionFiles(newFile, existingFile);
+            List<string> MethodsToOverride = new List<string>();
+            MethodsToOverride.Add("SumValues");
+            MethodsToOverride.Add("New123");
 
-            File.WriteAllText(@"C:\Users\victo\Documents\Drive DiL\ONE 2024\temp zip files\UnitTestMyFirstProjectMerged.cs", mergedFile);
+            string mergedFile = logic.MergeActionsFileForGitHub(newFile, existingFile, MethodsToOverride);
+
+            File.WriteAllText(@"C:\Users\victo\Documents\Drive DiL\ONE 2024\Test Data\MergedActions.cs", mergedFile);
+
+            Assert.Equal(1, 1);
+        }
+
+        [Fact]
+        public void MergeActionsFileForAI() {
+            string newFile = File.ReadAllText(@"C:\Users\victo\Documents\Drive DiL\ONE 2024\Test Data\AI Generated Method.cs", System.Text.Encoding.UTF8);
+            string existingFile = File.ReadAllText(@"C:\Users\victo\Documents\Drive DiL\ONE 2024\temp zip files\MyFirstProject_v24\MyFirstProject\actions\ActionsMyFirstProject.cs", System.Text.Encoding.UTF8);
+
+            string mergedFile = logic.MergeActionsFileForAI(newFile, existingFile);
+
+            File.WriteAllText(@"C:\Users\victo\Documents\Drive DiL\ONE 2024\Test Data\AI Generated Method Merged.cs", mergedFile);
+
+            Assert.Equal(1, 1);
         }
     }
 }
