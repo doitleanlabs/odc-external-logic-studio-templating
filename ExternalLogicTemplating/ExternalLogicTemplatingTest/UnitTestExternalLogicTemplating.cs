@@ -181,5 +181,12 @@ namespace ExternalLogicTemplatingTest {
 
             Assert.Equal(1, 1);
         }
+
+        [Fact]
+        public void ReadXIF() {
+            string XML = logic.ReadXIF(File.ReadAllBytes(@"C:\Users\victo\Documents\Drive DiL\ONE 2024\OS11 Extension\ardoJSON_v1.xif"));
+
+            Console.WriteLine(XML);
+        }
     }
 }
