@@ -52,5 +52,6 @@ namespace ExternalLogicTemplating.interfaces {
             ReturnType = OSDataType.Text
         )]
         string ReadXIF(byte[] XifFile);
+
     }
 }

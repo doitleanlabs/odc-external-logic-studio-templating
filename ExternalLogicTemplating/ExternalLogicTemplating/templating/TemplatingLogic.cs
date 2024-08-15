@@ -39,6 +39,11 @@ namespace ExternalLogicTemplating.templating {
             //Structures File
             string structureFile = GenerateStructureFile(Project, Structures);
 
+            //PowerShell script file
+            string PowerShellScriptFile = TemplatingUtil.generateFile(FileToBeProcessed.PowerShellScriptFile, new {
+                ProjectName = Project.ProjectName
+            });
+
             /*
              * BEGIN Test Project
              */

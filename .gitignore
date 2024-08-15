@@ -31,3 +31,7 @@
 /ExternalLogicTemplating/.vs/ProjectEvaluation
 /ExternalLogicTemplating/ExternalLogicTemplatingTest/bin/Debug/net6.0
 /ExternalLogicTemplating/ExternalLogicTemplatingTest/obj
+/ExternalLogicTemplating/ExternalLogicTemplating/bin
+/ExternalLogicTemplating/ExternalLogicTemplating/dist
+/ExternalLogicTemplating/ExternalLogicTemplating/obj
+/ExternalLogicTemplating/ExternalLogicTemplatingTest/bin

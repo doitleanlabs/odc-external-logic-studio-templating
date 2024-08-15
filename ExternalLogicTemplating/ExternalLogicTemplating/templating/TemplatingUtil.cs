@@ -15,7 +15,8 @@ namespace ExternalLogicTemplating.templating {
         Action = 3,
         Structure = 4,
         TestProject = 5,
-        TestClass = 6
+        TestClass = 6,
+        PowerShellScriptFile = 7
     }
 
     internal class TemplatingUtil {
@@ -45,6 +46,9 @@ namespace ExternalLogicTemplating.templating {
                     break;
                 case FileToBeProcessed.TestClass:
                     templateFileName = "TestProject.Template_TestClass.txt";
+                    break;
+                case FileToBeProcessed.PowerShellScriptFile:
+                    templateFileName = "CompileAndGenerateRelease.txt";
                     break;
             }
 

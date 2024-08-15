@@ -116,7 +116,7 @@ namespace ExternalLogicTemplating.util {
         /// <param name="action">The action</param>
         /// <returns>The action parameters definition</returns>
         public static string buildActionParameters(ST_ActionDefinition action) {
-            string actionParametes = string.Join(", ", action.Parameters.Select(obj => $"{getDataType(obj.DataType, obj.RecordDefinition)} {obj.Name}")); ;
+            string actionParametes = string.Join(", ", action.Parameters.Where(obj => obj.IsInput).Select(obj => $"{getDataType(obj.DataType, obj.RecordDefinition)} {obj.Name}"));
 
             return actionParametes;
         }
