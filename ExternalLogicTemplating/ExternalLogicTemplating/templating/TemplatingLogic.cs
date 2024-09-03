@@ -40,7 +40,7 @@ namespace ExternalLogicTemplating.templating {
             string structureFile = GenerateStructureFile(Project, Structures);
 
             //PowerShell script file
-            string PowerShellScriptFile = TemplatingUtil.generateFile(FileToBeProcessed.PowerShellScriptFile, new {
+            string powerShellScriptFile = TemplatingUtil.generateFile(FileToBeProcessed.PowerShellScriptFile, new {
                 ProjectName = Project.ProjectName
             });
 
@@ -80,7 +80,7 @@ namespace ExternalLogicTemplating.templating {
 
             string solutionFile = TemplatingUtil.generateFile(FileToBeProcessed.Solution, solutionContext);
 
-            zipFile = zipManagement.generateZipFiles(Project.ProjectName, solutionFile, actionFile, interfaceFile, structureFile, projectFile, testProjectFile, testClassFile, Project.Icons);
+            zipFile = zipManagement.generateZipFiles(Project.ProjectName, solutionFile, actionFile, interfaceFile, structureFile, projectFile, powerShellScriptFile, testProjectFile, testClassFile, Project.Icons);
 
             return zipFile;
         }
@@ -114,9 +114,9 @@ namespace ExternalLogicTemplating.templating {
                 actionData.Name = action.Name;
                 actionData.ActionAnnotationData = new Dictionary<string, string>();
 
-                actionData.ActionAnnotationData.Add("Description", "\"" + project.ProjectDescription + "\"");
-                if (!String.IsNullOrEmpty(project.ProjectIcon.FileName))
-                    actionData.ActionAnnotationData.Add("IconResourceName", $"\"{project.ProjectName}.resources." + project.ProjectIcon.FileName + "\"");
+                actionData.ActionAnnotationData.Add("Description", "\"" + action.Description + "\"");
+                if (!String.IsNullOrEmpty(action.Icon.FileName))
+                    actionData.ActionAnnotationData.Add("IconResourceName", $"\"{project.ProjectName}.resources." + action.Icon.FileName + "\"");
 
                 // If it has output parameter, set its data
                 if (outputParameter.Name != null) {

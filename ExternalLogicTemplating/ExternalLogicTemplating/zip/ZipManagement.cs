@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ExternalLogicTemplating.zip {
     public class ZipManagement {
-        public byte[] generateZipFiles(string projectName, string snlFileContent, string actionFileContent, string interfaceFileContent, string structureFileContent, string projectFileContent, string testProjectFile, string testClassFile, List<ST_Icon> icons) {
+        public byte[] generateZipFiles(string projectName, string snlFileContent, string actionFileContent, string interfaceFileContent, string structureFileContent, string projectFileContent, string powerShellScriptFile, string testProjectFile, string testClassFile, List<ST_Icon> icons) {
             using (var memoryStream = new MemoryStream()) {
                 using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true)) {
                     // Add the .snl file
@@ -12,6 +12,9 @@ namespace ExternalLogicTemplating.zip {
 
                     // Create the ProjectName folder
                     archive.CreateEntry($"{projectName}/");
+
+                    // Add PowerShell script
+                    AddTextFileToArchive(archive, $"{projectName}/CompileAndGenerateRelease.ps1", powerShellScriptFile);
 
                     // Add files to the action folder
                     AddTextFileToArchive(archive, $"{projectName}/actions/Actions{projectName}.cs", actionFileContent);
