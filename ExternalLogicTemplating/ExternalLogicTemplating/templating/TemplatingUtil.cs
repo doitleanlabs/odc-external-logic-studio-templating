@@ -13,7 +13,10 @@ namespace ExternalLogicTemplating.templating {
         Project = 1,
         Interface = 2,
         Action = 3,
-        Structure = 4
+        Structure = 4,
+        TestProject = 5,
+        TestClass = 6,
+        PowerShellScriptFile = 7
     }
 
     internal class TemplatingUtil {
@@ -24,19 +27,28 @@ namespace ExternalLogicTemplating.templating {
 
             switch (fileToBeProcessed) {
                 case FileToBeProcessed.Solution:
-                    templateFileName = "Template_Solution.sln.txt";
+                    templateFileName = "Solution.Template_Solution.sln.txt";
                     break;
                 case FileToBeProcessed.Project:
-                    templateFileName = "Template_Project.csproj.txt";
+                    templateFileName = "Project.Template_Project.csproj.txt";
                     break;
                 case FileToBeProcessed.Interface:
-                    templateFileName = "Template_Interface.txt";
+                    templateFileName = "Project.Template_Interface.txt";
                     break;
                 case FileToBeProcessed.Action:
-                    templateFileName = "Template_Action.txt";
+                    templateFileName = "Project.Template_Action.txt";
                     break;
                 case FileToBeProcessed.Structure:
-                    templateFileName = "Template_Structure.txt";
+                    templateFileName = "Project.Template_Structure.txt";
+                    break;
+                case FileToBeProcessed.TestProject:
+                    templateFileName = "TestProject.Template_TestProject.csproj.txt";
+                    break;
+                case FileToBeProcessed.TestClass:
+                    templateFileName = "TestProject.Template_TestClass.txt";
+                    break;
+                case FileToBeProcessed.PowerShellScriptFile:
+                    templateFileName = "CompileAndGenerateRelease.txt";
                     break;
             }
 

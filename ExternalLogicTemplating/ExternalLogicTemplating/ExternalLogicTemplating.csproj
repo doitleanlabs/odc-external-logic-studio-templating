@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -12,11 +12,14 @@
     <None Remove="resources\icons\icon_merge.png" />
     <None Remove="resources\icon_gear.png" />
     <None Remove="resources\icon_generate.png" />
+    <None Remove="resources\templates\CompileAndGenerateRelease.txt" />
     <None Remove="resources\templates\Template_Action.txt" />
     <None Remove="resources\templates\Template_Interface.txt" />
     <None Remove="resources\templates\Template_Project.csproj.txt" />
     <None Remove="resources\templates\Template_Solution.sln.txt" />
     <None Remove="resources\templates\Template_Structure.txt" />
+    <None Remove="resources\templates\TestProject\Template_TestClass.txt" />
+    <None Remove="resources\templates\TestProject\Template_TestProject.csproj.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,11 +28,14 @@
     <EmbeddedResource Include="resources\icons\icon_generate.png" />
     <EmbeddedResource Include="resources\icons\icon_magnifier.png" />
     <EmbeddedResource Include="resources\icons\icon_merge.png" />
-    <EmbeddedResource Include="resources\templates\Template_Structure.txt" />
-    <EmbeddedResource Include="resources\templates\Template_Action.txt" />
-    <EmbeddedResource Include="resources\templates\Template_Interface.txt" />
-    <EmbeddedResource Include="resources\templates\Template_Project.csproj.txt" />
-    <EmbeddedResource Include="resources\templates\Template_Solution.sln.txt" />
+    <EmbeddedResource Include="resources\templates\CompileAndGenerateRelease.txt" />
+    <EmbeddedResource Include="resources\templates\Project\Template_Structure.txt" />
+    <EmbeddedResource Include="resources\templates\Project\Template_Action.txt" />
+    <EmbeddedResource Include="resources\templates\Project\Template_Interface.txt" />
+    <EmbeddedResource Include="resources\templates\Project\Template_Project.csproj.txt" />
+    <EmbeddedResource Include="resources\templates\Solution\Template_Solution.sln.txt" />
+    <EmbeddedResource Include="resources\templates\TestProject\Template_TestClass.txt" />
+    <EmbeddedResource Include="resources\templates\TestProject\Template_TestProject.csproj.txt" />
   </ItemGroup>
 
   <ItemGroup>

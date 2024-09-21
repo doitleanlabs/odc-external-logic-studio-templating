@@ -33,7 +33,16 @@ namespace ExternalLogicTemplating.interfaces {
             ReturnName = "MergedFile",
             ReturnType = OSDataType.Text
         )]
-        string MergeActionFiles(string NewFile, string ExistingFile);
+        string MergeActionsFileForGitHub(string NewFile, string ExistingFile, List<string> MethodsToOverride);
+
+        [OSAction(
+            Description = "Merge 2 cs files (current code + code from AI) updating all methods from AI response and keeping the current code",
+            IconResourceName = "ExternalLogicTemplating.resources.icons.icon_merge.png",
+            ReturnDescription = "New merged file",
+            ReturnName = "MergedFile",
+            ReturnType = OSDataType.Text
+        )]
+        string MergeActionsFileForAI(string NewFile, string ExistingFile);
 
         [OSAction(
             Description = "Read  XIF file to get the Actions and Structures",
@@ -43,5 +52,6 @@ namespace ExternalLogicTemplating.interfaces {
             ReturnType = OSDataType.Text
         )]
         string ReadXIF(byte[] XifFile);
+
     }
 }

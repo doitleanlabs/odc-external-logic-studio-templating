@@ -6,7 +6,7 @@ using ExternalLogicTemplating.XIF;
 using System.Text.RegularExpressions;
 
 namespace ExternalLogicTemplating.action {
-    public class ExternalLogicTemplatingLogic : InterfaceExternalLogicTemplating {
+    public class ActionsExternalLogicTemplating : InterfaceExternalLogicTemplating {
         /*
          * 
          * ProjectName.snl
@@ -18,7 +18,7 @@ namespace ExternalLogicTemplating.action {
          *   structure
          *   ProjectName.csproj
          */
-        public ExternalLogicTemplatingLogic() {
+        public ActionsExternalLogicTemplating() {
 
         }
 
@@ -50,10 +50,18 @@ namespace ExternalLogicTemplating.action {
             return controlCharacterPercentage < MaxControlCharactersPercentage;
         }
 
-        public string MergeActionFiles(string NewFile, string ExistingFile) {
+        public string MergeActionsFileForGitHub(string NewFile, string ExistingFile, List<string> MethodsToOverride) {
             MergeLogic mergeLogic = new MergeLogic();
 
-            string mergedFile = mergeLogic.Merge(NewFile, ExistingFile);
+            string mergedFile = mergeLogic.MergeActionsForGitHub(NewFile, ExistingFile, MethodsToOverride);
+
+            return mergedFile;
+        }
+
+        public string MergeActionsFileForAI(string NewFile, string ExistingFile) {
+            MergeLogic mergeLogic = new MergeLogic();
+
+            string mergedFile = mergeLogic.MergeActionsForAI(NewFile, ExistingFile);
 
             return mergedFile;
         }

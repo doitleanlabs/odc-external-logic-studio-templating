@@ -1,9 +1,9 @@
 ﻿using {{ProjectName}}.interfaces;
-using {{ProjectName}}.structure;
+using {{ProjectName}}.structures;
 
-namespace {{ProjectName}}.action {
-    public class {{ProjectName}} : Interface{{ProjectName}} {
-        public {{ProjectName}}() {
+namespace {{ProjectName}}.actions {
+    public class Actions{{ProjectName}} : Interface{{ProjectName}} {
+        public Actions{{ProjectName}}() {
 
         }
 

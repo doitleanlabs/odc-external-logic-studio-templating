@@ -1,0 +1,20 @@
+﻿using {{ProjectName}}.actions;
+using {{ProjectName}}.structures;
+
+namespace {{TestProjectName}} {
+    public class UnitTest{{TestProjectName}} {
+        Actions{{ProjectName}} _actions{{ProjectName}};
+
+        public UnitTest{{TestProjectName}}() {
+            _actions{{ProjectName}} = new Actions{{ProjectName}}();
+        }
+
+        {{#each Actions}}
+        [Fact]
+        public void {{Name}}() {
+            // Assert.Equal(expectedValue, actualValue);
+        }
+
+        {{/each}}
+    }
+}

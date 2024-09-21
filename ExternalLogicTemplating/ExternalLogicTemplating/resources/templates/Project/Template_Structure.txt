@@ -1,6 +1,6 @@
 ﻿using OutSystems.ExternalLibraries.SDK;
 
-namespace {{ProjectName}}.structure
+namespace {{ProjectName}}.structures
 {
     {{#each Structures}}
     [OSStructure(

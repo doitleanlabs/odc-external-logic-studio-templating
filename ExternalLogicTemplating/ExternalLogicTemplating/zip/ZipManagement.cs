@@ -4,20 +4,23 @@ using System.Text;
 
 namespace ExternalLogicTemplating.zip {
     public class ZipManagement {
-        public byte[] generateZipFiles(string projectName, string snlFileContent, string actionFileContent, string interfaceFileContent, string structureFileContent, string projectFileContent, List<ST_Icon> icons) {
+        public byte[] generateZipFiles(string projectName, string snlFileContent, string actionFileContent, string interfaceFileContent, string structureFileContent, string projectFileContent, string powerShellScriptFile, string testProjectFile, string testClassFile, List<ST_Icon> icons) {
             using (var memoryStream = new MemoryStream()) {
                 using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true)) {
                     // Add the .snl file
                     AddTextFileToArchive(archive, $"{projectName}.sln", snlFileContent);
 
                     // Create the ProjectName folder
-                    var projectFolder = archive.CreateEntry($"{projectName}/");
+                    archive.CreateEntry($"{projectName}/");
+
+                    // Add PowerShell script
+                    AddTextFileToArchive(archive, $"{projectName}/CompileAndGenerateRelease.ps1", powerShellScriptFile);
 
                     // Add files to the action folder
-                    AddTextFileToArchive(archive, $"{projectName}/action/Action{projectName}.cs", actionFileContent);
+                    AddTextFileToArchive(archive, $"{projectName}/actions/Actions{projectName}.cs", actionFileContent);
 
                     // Add files to the interface folder
-                    AddTextFileToArchive(archive, $"{projectName}/interface/Interface{projectName}.cs", interfaceFileContent);
+                    AddTextFileToArchive(archive, $"{projectName}/interfaces/Interface{projectName}.cs", interfaceFileContent);
 
                     foreach (ST_Icon icon in icons) {
                         // Add files to the resources folder
@@ -25,10 +28,22 @@ namespace ExternalLogicTemplating.zip {
                     }
 
                     // Add files to the structure folder
-                    AddTextFileToArchive(archive, $"{projectName}/structure/Structure{projectName}.cs", structureFileContent);
+                    AddTextFileToArchive(archive, $"{projectName}/structures/Structures{projectName}.cs", structureFileContent);
 
                     // Add the project file
                     AddTextFileToArchive(archive, $"{projectName}/{projectName}.csproj", projectFileContent);
+
+                    /*
+                     * Test Project
+                     */
+                    // Create the ProjectName folder
+                    archive.CreateEntry($"{projectName}Test/");
+
+                    // Add test project class file to the test project folder
+                    AddTextFileToArchive(archive, $"{projectName}Test/UnitTest{projectName}.cs", testClassFile);
+
+                    // Add test class file to the test project folder
+                    AddTextFileToArchive(archive, $"{projectName}Test/{projectName}Test.csproj", testProjectFile);
                 }
 
                 return memoryStream.ToArray();
