@@ -116,16 +116,18 @@ namespace ExternalLogicTemplating.XIF {
         }
 
         private static void ParseAction(JToken action) {
-            JToken inputParametersNode = action["Variables"]["InputParameter"];
-            if (inputParametersNode != null && inputParametersNode.Type == JTokenType.Object) {
-                JArray inputParametersArray = new JArray(inputParametersNode);
-                action["Variables"]["InputParameter"] = inputParametersArray;
-            }
+            if(action["Variables"] != null && action["Variables"].Type == JTokenType.Object) { 
+                JToken inputParametersNode = action["Variables"]["InputParameter"];
+                if (inputParametersNode != null && inputParametersNode.Type == JTokenType.Object) {
+                    JArray inputParametersArray = new JArray(inputParametersNode);
+                    action["Variables"]["InputParameter"] = inputParametersArray;
+                }
 
-            JToken outputParametersNode = action["Variables"]["OutputParameter"];
-            if (outputParametersNode != null && outputParametersNode.Type == JTokenType.Object) {
-                JArray outputParametersArray = new JArray(outputParametersNode);
-                action["Variables"]["OutputParameter"] = outputParametersArray;
+                JToken outputParametersNode = action["Variables"]["OutputParameter"];
+                if (outputParametersNode != null && outputParametersNode.Type == JTokenType.Object) {
+                    JArray outputParametersArray = new JArray(outputParametersNode);
+                    action["Variables"]["OutputParameter"] = outputParametersArray;
+                }
             }
         }
 
