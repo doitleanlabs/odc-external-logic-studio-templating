@@ -16,7 +16,7 @@ namespace ExternalLogicTemplating.Merge {
 
                 // Iterate over each class in the new code
                 foreach (KeyValuePair<string, ClassDeclarationSyntax> newClassKvp in newClasses) {
-                    ClassDeclarationSyntax existingClass;
+                    ClassDeclarationSyntax? existingClass;
                     // Check if the class exists in the existing code
                     if (existingClasses.TryGetValue(newClassKvp.Key, out existingClass)) {
                         ClassDeclarationSyntax newClass = newClassKvp.Value;
@@ -29,7 +29,7 @@ namespace ExternalLogicTemplating.Merge {
 
                         // Replace the existing method signatures with the new ones
                         foreach (KeyValuePair<string, MethodDeclarationSyntax> newMethodKvp in newMethods) {
-                            MethodDeclarationSyntax existingMethod;
+                            MethodDeclarationSyntax? existingMethod;
                             if (existingMethods.TryGetValue(newMethodKvp.Key, out existingMethod)) {
                                 // Check if the method should be overridden completely
                                 if (methodsToOverride.Contains(newMethodKvp.Key)) {

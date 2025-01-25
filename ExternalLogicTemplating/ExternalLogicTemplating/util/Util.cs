@@ -1,4 +1,5 @@
 ﻿using ExternalLogicTemplating.structure;
+using System.Collections.Generic;
 
 namespace ExternalLogicTemplating.util {
     public class Util {
@@ -71,7 +72,7 @@ namespace ExternalLogicTemplating.util {
                 case 9:
                     return parameter.RecordDefinition + " output = new " + parameter.RecordDefinition + "();" + Environment.NewLine + Environment.NewLine + "            return output;";
                 case 10:
-                    return parameter.RecordDefinition + " output = new " + parameter.RecordDefinition + "();" + Environment.NewLine + Environment.NewLine + "            return output;";
+                    return "List<" + parameter.RecordDefinition + "> output = new List<" + parameter.RecordDefinition + ">();" + Environment.NewLine + Environment.NewLine + "            return output;";
                 default:
                     return "";
             }

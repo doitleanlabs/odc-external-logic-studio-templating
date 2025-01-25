@@ -7,7 +7,7 @@ namespace ExternalLogicTemplating.util {
             Assembly assembly = Assembly.GetExecutingAssembly();
 
             // Read the resource
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName)) {
+            using (Stream? stream = assembly.GetManifestResourceStream(resourceName)) {
                 if (stream == null) {
                     return "Resource not found.";
                 }

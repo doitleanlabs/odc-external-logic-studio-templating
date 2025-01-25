@@ -8,7 +8,7 @@ namespace {{ProjectName}}.actions {
         }
 
         {{#each Actions}}
-        public {{Output}} {{Name}}({{{ActionDefinition}}}) {
+        public {{{Output}}} {{Name}}({{{ActionDefinition}}}) {
             {{{Content}}}
         }
 

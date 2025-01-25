@@ -14,7 +14,7 @@ namespace {{ProjectName}}.interfaces
             {{#annotationsData ActionAnnotationData 3}}
             {{/annotationsData}}
         )]
-        {{Output}} {{Name}}({{{ActionDefinition}}});
+        {{{Output}}} {{Name}}({{{ActionDefinition}}});
         {{/each}}
     }
 }
