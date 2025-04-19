@@ -40,6 +40,8 @@ namespace ExternalLogicTemplating.util {
                     return recordDefinition;
                 case 10:
                     return "List<" + recordDefinition + ">";
+                case 12:
+                    return "DateTime";
                 default:
                     return "";
             }
@@ -73,6 +75,8 @@ namespace ExternalLogicTemplating.util {
                     return parameter.RecordDefinition + " output = new " + parameter.RecordDefinition + "();" + Environment.NewLine + Environment.NewLine + "            return output;";
                 case 10:
                     return "List<" + parameter.RecordDefinition + "> output = new List<" + parameter.RecordDefinition + ">();" + Environment.NewLine + Environment.NewLine + "            return output;";
+                case 12:
+                    return "DateTime output = new DateTime();" + Environment.NewLine + Environment.NewLine + "            return output;";
                 default:
                     return "";
             }
@@ -106,6 +110,8 @@ namespace ExternalLogicTemplating.util {
                     return "OSDataType.InferredFromDotNetType";
                 case 10:
                     return "OSDataType.InferredFromDotNetType";
+                case 12:
+                    return "OSDataType.Time";
                 default:
                     return "";
             }

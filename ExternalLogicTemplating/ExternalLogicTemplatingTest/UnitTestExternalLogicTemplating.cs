@@ -184,7 +184,7 @@ namespace ExternalLogicTemplatingTest {
 
         [Fact]
         public void ReadXIF() {
-            string XML = logic.ReadXIF(File.ReadAllBytes(@"C:\Users\victor.salvalagio\Downloads\MultiIconExtension.xif"));
+            string XML = logic.ReadXIF(File.ReadAllBytes(@"C:\Users\victo\Downloads\Extended.DateTime-11.0.3_O11\Extended_DateTime\DateTime.xif"));
 
             Console.WriteLine(XML);
         }

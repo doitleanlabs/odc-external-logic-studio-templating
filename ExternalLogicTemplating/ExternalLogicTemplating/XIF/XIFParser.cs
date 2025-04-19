@@ -11,6 +11,7 @@ using System.Xml.Linq;
 
 namespace ExternalLogicTemplating.XIF {
     internal class XIFParser {
+
         public string parseXIF(byte[] xifFile) {
             XDocument xif = XifUtils.ReadXif(xifFile);
 
@@ -91,7 +92,6 @@ namespace ExternalLogicTemplating.XIF {
                 }
             }
 
-            
             JToken actionsNode = jsonObject["Actions"];
             if (actionsNode != null && !String.IsNullOrEmpty(actionsNode.ToString())) {
                 if (actionsNode["Action"] is JArray) {
@@ -111,7 +111,17 @@ namespace ExternalLogicTemplating.XIF {
                     actionsNode["Action"] = actionArray;
                 }
             }
-            
+
+            if (jsonObject["Resources"] != null && jsonObject["Resources"]["Resource"] != null) {
+                JToken resourceListNode = jsonObject["Resources"]["Resource"];
+
+                foreach (JToken resource in resourceListNode) {
+                    if (resource["References"] != null && resource["References"] is not JArray) {
+                        resource["References"].Parent.Remove();
+                    }
+                }
+            }
+
             return jsonObject.ToString();
         }
 
