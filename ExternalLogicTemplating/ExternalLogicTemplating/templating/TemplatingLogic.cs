@@ -108,7 +108,7 @@ namespace ExternalLogicTemplating.templating {
             // Actions
             interfaceContext.Actions = new List<ExpandoObject>();
             foreach (ST_ActionDefinition action in Actions) {
-                ST_ActionParameterDefinition outputParameter = Util.getOutputParameter(action);
+                //ST_ActionParameterDefinition outputParameter = Util.getOutputParameter(action);
 
                 dynamic actionData = new ExpandoObject();
                 actionData.Name = action.Name;
@@ -118,17 +118,9 @@ namespace ExternalLogicTemplating.templating {
                 if (!String.IsNullOrEmpty(action.Icon.FileName))
                     actionData.ActionAnnotationData.Add("IconResourceName", $"\"{project.ProjectName}.resources." + action.Icon.FileName + "\"");
 
-                // If it has output parameter, set its data
-                if (outputParameter.Name != null) {
-                    actionData.ActionAnnotationData.Add("ReturnDescription", "\"Return Description\"");
-                    actionData.ActionAnnotationData.Add("ReturnName", "\"" + outputParameter.Name + "\"");
-                    actionData.ActionAnnotationData.Add("ReturnType", Util.getOSDataType(outputParameter.DataType));
-
-                    actionData.Output = Util.getDataType(outputParameter.DataType, outputParameter.RecordDefinition);
-                } else {
-                    actionData.Output = "void";
-                }
-
+                // always void
+                actionData.Output = "void";
+                
                 actionData.ActionDefinition = Util.buildActionParameters(action);
 
                 interfaceContext.Actions.Add(actionData);
@@ -153,21 +145,16 @@ namespace ExternalLogicTemplating.templating {
             // Actions
             actionContext.Actions = new List<ExpandoObject>();
             foreach (ST_ActionDefinition action in Actions) {
-                ST_ActionParameterDefinition outputParameter = Util.getOutputParameter(action);
+                //ST_ActionParameterDefinition outputParameter = Util.getOutputParameter(action);
 
                 dynamic actionData = new ExpandoObject();
                 actionData.Name = action.Name;
 
-                // If it has output parameter, set its data
-                if (outputParameter.Name != null) {
-                    actionData.Output = Util.getDataType(outputParameter.DataType, outputParameter.RecordDefinition);
+                // always void
+                actionData.Output = "void";
 
-                    // Add initial method content
-                    actionData.Content = Util.getInitialMethodContentWithReturn(outputParameter);
-                } else {
-                    actionData.Output = "void";
-                }
-
+                actionData.Content = Util.getInitialMethodContentWithReturn(action);
+                
                 actionData.ActionDefinition = Util.buildActionParameters(action);
 
                 actionContext.Actions.Add(actionData);

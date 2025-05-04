@@ -48,38 +48,67 @@ namespace ExternalLogicTemplating.util {
         }
 
         /// <summary>
-        /// Return the initial content for the method, with the output declaration and return (if any)
+        /// Return the initial content for the method, with the output parameters initialization
+        /// </summary>
+        /// <param name="action">The action</param>
+        /// <returns>The initial content for the method, with the output declaration and return (if any)</returns>
+        public static string getInitialMethodContentWithReturn(ST_ActionDefinition action) {
+            string output = "";
+
+            foreach (var item in action.Parameters.Where(item => !item.IsInput))
+            {
+                output += getOutputInitialization(item);
+            }
+
+            return output;
+        }
+
+        /// <summary>
+        /// Return the initialization content for the output parameter
         /// </summary>
         /// <param name="parameter">The parameter</param>
         /// <returns>The initial content for the method, with the output declaration and return (if any)</returns>
-        public static string getInitialMethodContentWithReturn(ST_ActionParameterDefinition parameter) {
-
-            switch (parameter.DataType) {
+        public static string getOutputInitialization(ST_ActionParameterDefinition parameter)
+        {
+            string output = parameter.Name;
+            switch (parameter.DataType)
+            {
                 case 1:
-                    return "byte[] output = new byte[] { };" + Environment.NewLine + Environment.NewLine + "            return output;";
+                    output += " = new byte[] { };" + Environment.NewLine + Environment.NewLine;
+                    break;
                 case 2:
-                    return "bool output = false;" + Environment.NewLine + Environment.NewLine + "            return output;";
+                    output += " = false;" + Environment.NewLine + Environment.NewLine;
+                    break;
                 case 3:
-                    return "DateOnly output = new DateOnly();" + Environment.NewLine + Environment.NewLine + "            return output;";
+                    output += " = new DateOnly();" + Environment.NewLine + Environment.NewLine;
+                    break;
                 case 4:
-                    return "DateTime output = new DateTime();" + Environment.NewLine + Environment.NewLine + "            return output;";
+                    output += " = new DateTime();" + Environment.NewLine + Environment.NewLine;
+                    break;
                 case 5:
-                    return "decimal output = 0;" + Environment.NewLine + Environment.NewLine + "            return output;";
+                    output += " = 0;" + Environment.NewLine + Environment.NewLine;
+                    break;
                 case 6:
-                    return "int output = 0;" + Environment.NewLine + Environment.NewLine + "            return output;";
+                    output += " = 0;" + Environment.NewLine + Environment.NewLine;
+                    break;
                 case 7:
-                    return "long output = 0;" + Environment.NewLine + Environment.NewLine + "            return output;";
+                    output += " = 0;" + Environment.NewLine + Environment.NewLine;
+                    break;
                 case 8:
-                    return "string output = \"\";" + Environment.NewLine + Environment.NewLine + "            return output;";
+                    output += " = \"\";" + Environment.NewLine + Environment.NewLine;
+                    break;
                 case 9:
-                    return parameter.RecordDefinition + " output = new " + parameter.RecordDefinition + "();" + Environment.NewLine + Environment.NewLine + "            return output;";
+                    output += " = new " + parameter.RecordDefinition + "();" + Environment.NewLine + Environment.NewLine;
+                    break;
                 case 10:
-                    return "List<" + parameter.RecordDefinition + "> output = new List<" + parameter.RecordDefinition + ">();" + Environment.NewLine + Environment.NewLine + "            return output;";
+                    output += " = new List<" + parameter.RecordDefinition + ">();" + Environment.NewLine + Environment.NewLine;
+                    break;
                 case 12:
-                    return "DateTime output = new DateTime();" + Environment.NewLine + Environment.NewLine + "            return output;";
-                default:
-                    return "";
+                    output += " = new DateTime();" + Environment.NewLine + Environment.NewLine;
+                    break;
             }
+
+            return output;
         }
 
         /// <summary>
@@ -123,9 +152,21 @@ namespace ExternalLogicTemplating.util {
         /// <param name="action">The action</param>
         /// <returns>The action parameters definition</returns>
         public static string buildActionParameters(ST_ActionDefinition action) {
-            string actionParametes = string.Join(", ", action.Parameters.Where(obj => obj.IsInput).Select(obj => $"{getDataType(obj.DataType, obj.RecordDefinition)} {obj.Name}"));
+            //string actionParameters = string.Join(", ", action.Parameters.Where(obj => obj.IsInput).Select(obj => $"{getDataType(obj.DataType, obj.RecordDefinition)} {obj.Name}"));
+            string actionParameters = string.Join(", ",
+                    action.Parameters
+                        .Where(p => p.IsInput)
+                        .OrderBy(p => p.Order)
+                        .Select(p => $"{getDataType(p.DataType, p.RecordDefinition)} {p.Name}")
+                    .Concat(
+                        action.Parameters
+                            .Where(p => !p.IsInput)
+                            .OrderBy(p => p.Order)
+                            .Select(p => $"out {getDataType(p.DataType, p.RecordDefinition)} {p.Name}")
+                    )
+                );
 
-            return actionParametes;
+            return actionParameters;
         }
     }
 }
